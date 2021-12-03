@@ -9,8 +9,13 @@ RUN apt update
 
 # install package necessary for pygraphviz
 RUN apt install -y wget graphviz-dev
+
 # install packages related to python
-RUN apt install -y python3.8 python3-pip python3-dev
+RUN apt-get update
+RUN apt-get install -y graphviz
+
+RUN apt-get install -y python3.5 python3-pip python3-dev
+
 
 
 RUN pip3 install --upgrade pip
@@ -18,16 +23,20 @@ RUN pip3 install --upgrade pip
 # install causal graph discovery tool
 RUN pip3 install causalnex 
 
+# install causal graph verification tool
+RUN pip3 install dowhy
+
 # install causal inferences general tool box
 RUN pip3 install econml causalml
 
 # install plotting related packages
-RUN pip3 install pygraphviz plotly
+RUN pip3 install graphviz pygraphviz plotly
 
 # install jupyter notebook with bash kernel
 RUN pip3 install notebook
 RUN pip3 install bash_kernel
 RUN python3 -m bash_kernel.install
+
 
 
 RUN mkdir -p ~/data
