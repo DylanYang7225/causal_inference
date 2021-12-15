@@ -37,7 +37,14 @@ RUN pip3 install notebook
 RUN pip3 install bash_kernel
 RUN python3 -m bash_kernel.install
 
+# install scikit-bio (anosim test)
+RUN pip3 install scikit-bio
 
+# re-install numpy to solve "The kernel appears to have died." issue
+RUN pip3 install -U numpy tensorflow keras
+
+# install certain version of numba so that econml works
+RUN pip3 install numba==0.54
 
 RUN mkdir -p ~/data
 RUN mkdir -p ~/output
