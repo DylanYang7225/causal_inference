@@ -1,0 +1,59 @@
+FROM ubuntu:latest
+LABEL maintainer="yanghang08@corp.netease.com"
+LABEL version="0.1"
+LABEL description="This is custom Docker Image for unsupervised clustering."
+
+
+# install other packages needed
+RUN apt update
+
+# install package necessary for pygraphviz
+RUN apt install -y wget graphviz-dev
+
+# install packages related to python
+RUN apt-get update
+RUN apt-get install -y graphviz
+
+RUN apt-get install -y python3.5 python3-pip python3-dev
+
+
+
+RUN pip3 install --upgrade pip
+
+RUN pip3 install -U scikit-learn
+
+RUN pip3 install leidenalg igraph
+
+# pynndescent is suggested to be coupled with umap to improve performance
+RUN pip3 install umap-learn
+RUN pip3 install pynndescent
+
+# installing the plotting compartment
+RUN pip3 install graphviz pygraphviz 
+RUN pip3 install seaborn
+RUN pip3 install ipywidgets>=7.6
+RUN pip3 install plotly
+
+RUN pip3 install statsmodels
+
+# install jupyter notebook with bash kernel
+RUN pip3 install notebook
+RUN pip3 install bash_kernel
+RUN python3 -m bash_kernel.install
+
+# install scikit-bio (anosim test)
+#RUN pip3 install scikit-bio
+
+# re-install numpy to solve "The kernel appears to have died." issue
+RUN pip3 install -U numpy tensorflow keras
+
+# install certain version of numba so that other packages work (MUST INSTALL!)
+RUN pip3 install numba==0.54
+
+
+
+RUN mkdir -p ~/data
+RUN mkdir -p ~/output
+RUN mkdir -p ~/scratch
+
+WORKDIR /root
