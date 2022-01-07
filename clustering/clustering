@@ -3,7 +3,6 @@ LABEL maintainer="yanghang08@corp.netease.com"
 LABEL version="0.1"
 LABEL description="This is custom Docker Image for unsupervised clustering."
 
-
 # install other packages needed
 RUN apt update
 
@@ -28,6 +27,7 @@ RUN pip3 install leidenalg igraph
 RUN pip3 install umap-learn
 RUN pip3 install pynndescent
 
+
 # installing the plotting compartment
 RUN pip3 install graphviz pygraphviz 
 RUN pip3 install seaborn
@@ -49,6 +49,9 @@ RUN pip3 install -U numpy tensorflow keras
 
 # install certain version of numba so that other packages work (MUST INSTALL!)
 RUN pip3 install numba==0.54
+
+# install scanpy
+RUN pip3 install scanpy
 
 
 
